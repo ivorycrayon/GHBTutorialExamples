@@ -1,0 +1,4 @@
+﻿  dllmain.cpp
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(94,15): warning C4100: 'lpReserved': unreferenced formal parameter
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(89): warning C4702: unreachable code
+  AssaultCubeTrainerInternal.vcxproj -> C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\Debug\AssaultCubeTrainerInternal.dll

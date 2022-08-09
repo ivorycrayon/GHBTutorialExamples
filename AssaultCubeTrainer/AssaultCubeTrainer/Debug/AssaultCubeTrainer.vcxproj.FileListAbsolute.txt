@@ -1,0 +1,3 @@
+C:\Users\Ivory\source\repos\AssaultCubeTrainer\AssaultCubeTrainer\Debug\AssaultCubeTrainer.vcxproj.MdMergeInputs.cache
+C:\Users\Ivory\source\repos\AssaultCubeTrainer\AssaultCubeTrainer\Debug\AssaultCubeTrainer.vcxproj.cppwinrt_plat.cache
+C:\Users\Ivory\source\repos\AssaultCubeTrainer\AssaultCubeTrainer\Debug\AssaultCubeTrainer.vcxproj.cppwinrt_comp.cache
