@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="color.hpp" />
     <ClInclude Include="mem.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="proc.h" />
