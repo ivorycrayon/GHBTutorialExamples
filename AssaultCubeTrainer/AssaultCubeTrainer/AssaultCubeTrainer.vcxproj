@@ -107,6 +107,7 @@
     <ClInclude Include="proc.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="hook.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="pch.cpp">

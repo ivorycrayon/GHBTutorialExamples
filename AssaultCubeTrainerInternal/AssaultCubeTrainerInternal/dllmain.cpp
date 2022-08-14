@@ -5,6 +5,8 @@
 #include "mem.h"
 #include "proc.h"
 #include "color.hpp"
+#include "hook.h"
+#include <string>
 
 //uintptr_t casting is to allow compatibility with x64
 //need to run debuggger -> inject -> step through
@@ -18,17 +20,7 @@
 struct Vector3 { float x, y, z; };
 
 bool bUpdateDisplay;
-std::string sHealth = "OFF", sAmmo = "OFF", sRecoil = "OFF", sRateOfFire = "OFF";
-
-WORD BLACK = 30;
-WORD RED = 31;
-WORD GREEN = 32;
-
-void setColor(WORD color)
-{
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-	return;
-}
+std::string sHealth = "OFF", sAmmo = "OFF", sRecoil = "OFF", sRateOfFire = "OFF", sIncrementAmmo = "OFF";
 
 class weapon
 {
@@ -37,29 +29,56 @@ public:
 	{
 		//              Type     Name    Offset
 		DEFINE_MEMBER_N(int32_t*, ammoPtr, 0x14);
-		DEFINE_MEMBER_N(int32_t*, recoilPtr, 0x28);
+		DEFINE_MEMBER_N(int32_t*, recoilPtr, 0x28); 
 	};
 };
 
 class PlayerEntity
 {
-public:
+public:	
 	union
 	{
+		DWORD vTable;
 		//              Type     Name    Offset
 		DEFINE_MEMBER_N(Vector3, posHead, 0x4);
 		DEFINE_MEMBER_N(Vector3, velocity, 0x28);
 		DEFINE_MEMBER_N(Vector3, posBody, 0x34);
 		DEFINE_MEMBER_N(Vector3, angle, 0x40);
 		DEFINE_MEMBER_N(int32_t, health, 0xF8);
-		DEFINE_MEMBER_N(weapon*, currentWeapon, 0x374);
+		DEFINE_MEMBER_N(int32_t, arAmmo, 0x128);
+		DEFINE_MEMBER_N(char, name[16], 0x225);
+		DEFINE_MEMBER_N(weapon*, currentWeapon, 0x374);		
 	};
 
 };
 
+struct EntList
+{
+	PlayerEntity* ents[31];
+};
 
+DWORD jmpBackAddy;
+void __declspec(naked) ourFunct()
+{
+	__asm {
+		inc [esi] // orig: dec [esi] FF 0E
+		push edi // 57
+		mov edi, [esp+0x14] // 8B 7C 24 14
+		jmp [jmpBackAddy]
+	}
+}
 
-
+bool isValidEnt(PlayerEntity* ent)
+{
+	if (ent)
+	{
+		if (ent->vTable == 0x4E4A98 || ent->vTable == 0x4E4AC0) //AC0 - BOTS vTable 
+		{
+			return true;
+		}
+	}
+	return false;
+}
 
 DWORD WINAPI HackThread(HMODULE hModule)
 {
@@ -69,28 +88,45 @@ DWORD WINAPI HackThread(HMODULE hModule)
 	freopen_s(&f, "CONOUT$", "w", stdout);
 
 	SetConsoleTitle(L"~Swag Central~");
-	system("mode 53, 17");
+	system("mode 53, 19");
 	int timeSinceLastUpdate = clock();
-
-	//std::cout << "~Swag Central Loaded~\n";
 
 	//Get Module Base
 	uintptr_t moduleBase = (uintptr_t)GetModuleHandle(L"ac_client.exe");
-
 	//std::cout << "Module Base Address: " << std::hex << std:: uppercase << moduleBase << std::endl;
 
-	bool bHealth = false, bAmmo = false, bRecoil = false, bRateOfFire = false;
+	bool bHealth = false, bAmmo = false, bRecoil = false, bRateOfFire = false, bIncrementAmmo = false;
 
 	//Hack Loop
 	while (true)
 	{
+		//PlayerEntity* localPlayer = (PlayerEntity*)*(uintptr_t*)(moduleBase + 0x10F4F4); //these lines are the same thing
+		PlayerEntity* localPlayer = *(PlayerEntity**)(moduleBase + 0x10F4F4); //these lines are the same thing
+
+		int* numOfPlayers = (int*)(moduleBase + 0x10F500);
+		EntList* entList = *(EntList**)(moduleBase + 0x10F4F8);
+		char newName[16] = "LOL";
+
+		for (int i = 0; i < *numOfPlayers; i++)
+		{
+			if (entList && isValidEnt(entList->ents[i]))
+			{
+				for (int j = 0; j < sizeof(newName); j++)
+				{
+					entList->ents[i]->name[j] = newName[j];
+				}
+			}
+		}
+
 		if (bUpdateDisplay || clock() - timeSinceLastUpdate > 3000) //update every 3000ms or on keypress
 		{
 			system("cls");
 			std::cout << "----------------------------------------------------" << std::endl;
-			std::cout << dye::purple("                ~SwagCentral~                       ") << std::endl;
-			std::cout << "              Pasted by Ivory ;)                    " << std::endl;
+			std::cout << dye::purple("                  ~SwagCentral~                     ") << std::endl;
+			std::cout << dye::aqua("                Pasted by Ivory ;)                  ") << std::endl;
 			std::cout << "----------------------------------------------------" << std::endl << std::endl;
+			std::cout << "Your name: " << localPlayer->name << "                         " << std::endl << std::endl;
+			std::cout << "Bot  name: " << entList->ents[1]->name << "                         " << std::endl << std::endl;
 			std::cout << "[NUMPAD1] Health Lock                   -> ";
 			if (bHealth) { std::cout << dye::green(sHealth); } else { std::cout << dye::red(sHealth); } 
 			std::cout << " <-" << std::endl << std::endl;
@@ -102,6 +138,10 @@ DWORD WINAPI HackThread(HMODULE hModule)
 			std::cout << " <-" << std::endl << std::endl;
 			std::cout << "[NUMPAD4] Max Rate Of Fire              -> ";
 			if (bRateOfFire) { std::cout << dye::green(sRateOfFire); } else { std::cout << dye::red(sRateOfFire); } 
+			std::cout << " <-" << std::endl << std::endl;
+			std::cout << "[NUMPAD5] Increment Ammo                -> ";
+			if (bIncrementAmmo) { std::cout << dye::green(sIncrementAmmo); }
+			else { std::cout << dye::red(sIncrementAmmo); }
 			std::cout << " <-" << std::endl << std::endl;
 			std::cout << dye::red("[END] Exit") << std::endl << std::endl;
 			std::cout << "---------------------------------------------------" << std::endl;
@@ -122,10 +162,12 @@ DWORD WINAPI HackThread(HMODULE hModule)
 
 			if (bHealth)
 			{
+				//mem::Nop((BYTE*)(moduleBase + 0x29D1F), 3); //hp code
 				sHealth = "ON ";
 			}
 			else
 			{
+				//mem::Patch((BYTE*)(moduleBase + 0x29D1F), (BYTE*)"\x29\x7B\x04", 3); // sub [ebx+04], edi
 				sHealth = "OFF";
 			}
 			
@@ -137,10 +179,12 @@ DWORD WINAPI HackThread(HMODULE hModule)
 
 			if (bAmmo)
 			{
+				mem::Nop((BYTE*)(moduleBase + 0x637E9), 2); //dec [esi] - ammo dec
 				sAmmo = "ON ";
 			}
 			else
 			{
+				mem::Patch((BYTE*)(moduleBase + 0x637E9), (BYTE*)"\xFF\x0E", 2); //dec [esi] - ammo dec
 				sAmmo = "OFF";
 			}
 		}
@@ -181,10 +225,31 @@ DWORD WINAPI HackThread(HMODULE hModule)
 				sRateOfFire = "OFF";
 			}
 		}
+		if (GetAsyncKeyState(VK_NUMPAD5) & 1)
+		{
+			bUpdateDisplay = true;
+			bIncrementAmmo = !bIncrementAmmo;
+
+			
+
+			if (bIncrementAmmo)
+			{
+				int hookLength = 7;
+				DWORD hookAddress = moduleBase + 0x637E9;
+				jmpBackAddy = hookAddress + hookLength;
+				Hook((void*)hookAddress, ourFunct, hookLength);
+				sIncrementAmmo = "ON ";
+			}
+			else
+			{
+				mem::Patch((BYTE*)(moduleBase + 0x637E9), (BYTE*)"\xFF\x0E", 2); //dec [esi] - ammo dec
+				mem::Patch((BYTE*)(moduleBase + 0x637EB), (BYTE*)"\x57", 1); //dec [esi] - ammo dec
+				mem::Patch((BYTE*)(moduleBase + 0x637EC), (BYTE*)"\x8B\x7C\x24\x14", 4); //dec [esi] - ammo dec
+				sIncrementAmmo = "OFF";
+			}
+		}
 
 		//Continous write/freeze
-		//PlayerEntity* localPlayer = (PlayerEntity*)*(uintptr_t*)(moduleBase + 0x10F4F4); //these lines are the same thing
-		PlayerEntity* localPlayer = *(PlayerEntity**)(moduleBase + 0x10F4F4);
 
 		if (localPlayer) //only executes when game is in session - would be nullptr in menus. will not work in all games
 		{
@@ -192,7 +257,6 @@ DWORD WINAPI HackThread(HMODULE hModule)
 			{
 				// *(int*)(*localPlayer + 0xF8) = 1337; // dereference player ptr, add f8, cast to int, then dereference 
 				localPlayer->health = 1337;
-				localPlayer->velocity = { 5.0, 5.0, 0.0 };
 			}
 
 			if (bAmmo)
@@ -204,7 +268,8 @@ DWORD WINAPI HackThread(HMODULE hModule)
 				//or just
 				//*(int*)mem::FindDMAAddy(moduleBase + 0x10F4F4, { 0x374, 0x14, 0x0 }) = 1337;
 
-				*localPlayer->currentWeapon->ammoPtr = 1337;
+				*localPlayer->currentWeapon->ammoPtr = 69; 
+				localPlayer->arAmmo = 420;
 			}
 		}
 		 

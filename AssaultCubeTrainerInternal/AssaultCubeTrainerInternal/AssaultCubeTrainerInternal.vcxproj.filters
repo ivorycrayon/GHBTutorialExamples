@@ -22,6 +22,9 @@
     <Filter Include="pch">
       <UniqueIdentifier>{13e8f51f-7398-4bc6-8163-59a8aaf726a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hook">
+      <UniqueIdentifier>{7e278223-e180-4756-b386-cc05425a0890}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mem.h">
@@ -36,6 +39,9 @@
     <ClInclude Include="color.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="hook.h">
+      <Filter>hook</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -49,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="proc.cpp">
       <Filter>proc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AssaultCubeTrainer\AssaultCubeTrainer\hook.cpp">
+      <Filter>hook</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -44,6 +44,9 @@
     <ClCompile Include="mem.cpp">
       <Filter>mem</Filter>
     </ClCompile>
+    <ClCompile Include="hook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="PropertySheet.props" />
