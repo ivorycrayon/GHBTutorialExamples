@@ -1,0 +1,3 @@
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\Debug\csgoTrainerInternal.vcxproj.MdMergeInputs.cache
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\Debug\csgoTrainerInternal.vcxproj.cppwinrt_plat.cache
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\Debug\csgoTrainerInternal.vcxproj.cppwinrt_comp.cache

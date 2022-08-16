@@ -1,0 +1,30 @@
+﻿  dllmain.cpp
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\color.hpp(121,70): warning C4244: 'argument': conversion from 'int' to 'WORD', possible loss of data
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(31,43): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(32,45): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(43,41): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(44,43): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(45,42): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(46,40): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(47,41): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(48,44): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(49,42): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(50,41): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(51,47): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(52,49): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(63,17): error C2485: 'naked': unrecognized extended attribute
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(65,2): error C4235: nonstandard extension used: '__asm' keyword not supported on this architecture
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(66,3): error C2065: 'inc': undeclared identifier
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(66,8): error C2065: 'esi': undeclared identifier
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(67,3): error C2146: syntax error: missing ';' before identifier 'push'
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(67,3): error C2065: 'push': undeclared identifier
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(67,8): error C2146: syntax error: missing ';' before identifier 'edi'
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(67,8): error C2065: 'edi': undeclared identifier
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(68,3): error C2146: syntax error: missing ';' before identifier 'mov'
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(68,3): error C2065: 'mov': undeclared identifier
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(68,7): error C2146: syntax error: missing ';' before identifier 'edi'
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(68,7): error C2065: 'edi': undeclared identifier
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(68,16): error C2760: syntax error: '+' was unexpected here; expected ','
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(68,21): error C2059: syntax error: ']'
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(261,23): warning C4244: 'initializing': conversion from 'uintptr_t' to 'DWORD', possible loss of data
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(263,28): warning C4312: 'type cast': conversion from 'DWORD' to 'void *' of greater size

@@ -7,9 +7,11 @@ C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInterna
 C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(45,42): warning C4201: nonstandard extension used: nameless struct/union
 C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(46,40): warning C4201: nonstandard extension used: nameless struct/union
 C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(47,41): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(48,42): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(49,41): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(50,49): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(289,15): warning C4100: 'lpReserved': unreferenced formal parameter
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(284): warning C4702: unreachable code
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(48,44): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(49,42): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(50,41): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(51,47): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(52,49): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(332,15): warning C4100: 'lpReserved': unreferenced formal parameter
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(327): warning C4702: unreachable code
   AssaultCubeTrainerInternal.vcxproj -> C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\Debug\AssaultCubeTrainerInternal.dll

@@ -1,0 +1,22 @@
+﻿  pch.cpp
+  hook.cpp
+  dllmain.cpp
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\color.hpp(121,70): warning C4244: 'argument': conversion from 'int' to 'WORD', possible loss of data
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(31,43): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(32,45): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(43,41): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(44,43): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(45,42): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(46,40): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(47,41): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(48,44): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(49,42): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(50,41): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(51,47): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(52,49): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(332,15): warning C4100: 'lpReserved': unreferenced formal parameter
+  mem.cpp
+  proc.cpp
+  Generating Code...
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(327): warning C4702: unreachable code
+  csgoTrainerInternal.vcxproj -> C:\Users\Ivory\source\repos\csgoTrainerInternal\Debug\csgoTrainerInternal.dll
