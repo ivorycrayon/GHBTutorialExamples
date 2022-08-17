@@ -38,7 +38,7 @@ class PlayerEntity
 public:	
 	union
 	{
-		DWORD vTable;
+		DWORD vTable; //0x0
 		//              Type     Name    Offset
 		DEFINE_MEMBER_N(Vector3, posHead, 0x4);
 		DEFINE_MEMBER_N(Vector3, velocity, 0x28);

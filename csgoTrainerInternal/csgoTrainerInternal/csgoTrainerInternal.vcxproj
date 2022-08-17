@@ -103,6 +103,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="color.hpp" />
+    <ClInclude Include="csgo_ent.h" />
     <ClInclude Include="hook.h" />
     <ClInclude Include="mem.h" />
     <ClInclude Include="pch.h" />

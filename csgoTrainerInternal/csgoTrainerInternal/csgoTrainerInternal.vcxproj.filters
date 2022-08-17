@@ -42,6 +42,9 @@
     <ClInclude Include="hook.h">
       <Filter>hook</Filter>
     </ClInclude>
+    <ClInclude Include="csgo_ent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
