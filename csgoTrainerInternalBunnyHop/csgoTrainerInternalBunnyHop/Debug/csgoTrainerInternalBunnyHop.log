@@ -1,0 +1,19 @@
+﻿  dllmain.cpp
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\color.hpp(121,70): warning C4244: 'argument': conversion from 'int' to 'WORD', possible loss of data
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\csgo_ent.h(18,42): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\csgo_ent.h(19,38): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\csgo_ent.h(20,46): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\csgo_ent.h(21,44): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\csgo_ent.h(22,40): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\csgo_ent.h(34,46): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\csgo_ent.h(35,49): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\csgo_ent.h(46,49): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\csgo_ent.h(57,40): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\csgo_ent.h(58,40): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\dllmain.cpp(40,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\dllmain.cpp(63,19): warning C4189: 'entList': local variable is initialized but not referenced
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\dllmain.cpp(67,12): warning C4189: 'fJump': local variable is initialized but not referenced
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\dllmain.cpp(58,6): warning C4189: 'timeSinceLastUpdate': local variable is initialized but not referenced
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\dllmain.cpp(135,15): warning C4100: 'lpReserved': unreferenced formal parameter
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\dllmain.cpp(130): warning C4702: unreachable code
+  csgoTrainerInternalBunnyHop.vcxproj -> C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\Debug\csgoTrainerInternalBunnyHop.dll

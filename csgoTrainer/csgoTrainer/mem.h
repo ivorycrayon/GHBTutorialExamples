@@ -1,20 +1,27 @@
 #pragma once
-#include "pch.h"
-#include <windows.h>
+#include <Windows.h>
 #include <vector>
 
-namespace mem
+class mem
 {
-	void PatchEx(BYTE* dst, BYTE* src, unsigned int size, HANDLE hProcess);
-	void NopEx(BYTE* dst, unsigned int size, HANDLE hProcess);
-	uintptr_t FindDMAAddy(HANDLE hProc, uintptr_t ptr, std::vector<unsigned int> offsets);
-
-/*
-Internal Versions
-Do not use Handles
-*/
-
-	void Patch(BYTE* dst, BYTE* src, unsigned int size);
-	void Nop(BYTE* dst, unsigned int size);
-	uintptr_t FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets);
-}
+public:
+	mem();
+	~mem();
+	template <class val>
+	val readMem(DWORD addr) //takes an address, reads and returns the value
+	{
+		val x;
+		ReadProcessMemory(handle, (LPBYTE*)addr, &x, sizeof(x), NULL);
+		return x;
+	}
+	template <class val>
+	val writeMem(DWORD addr, val x)
+	{
+		WriteProcessMemory(handle, (LPBYTE*)addr, &x, sizeof(x), NULL);
+		return 0;
+	}
+	DWORD getProcess(const wchar_t*);
+	uintptr_t getModule(DWORD, const wchar_t*);
+	uintptr_t getAddress(uintptr_t, std::vector<unsigned int>);
+	HANDLE handle;
+};

@@ -105,19 +105,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="hook.h" />
     <ClInclude Include="mem.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="proc.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="hook.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="proc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

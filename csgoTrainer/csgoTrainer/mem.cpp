@@ -1,66 +1,61 @@
 #include "pch.h"
 #include "mem.h"
+#include "Windows.h"
+#include <TlHelp32.h>
 
-void mem::PatchEx(BYTE* dst, BYTE* src, unsigned int size, HANDLE hProcess) 
-//src - new byte instructions to patch, dst - destination address to patch over
-//size is the # of instruction BYTE*s we're using
+mem::mem()
 {
-	DWORD oldprotect; //old permissions we will rewrite later
-	VirtualProtectEx(hProcess, dst, size, PAGE_EXECUTE_READWRITE, &oldprotect);
-	WriteProcessMemory(hProcess, dst, src, size, nullptr);
-	VirtualProtectEx(hProcess, dst, size, oldprotect, &oldprotect);
-
-}
-void mem::NopEx(BYTE* dst, unsigned int size, HANDLE hProcess)
-{
-	BYTE* nopArray = new BYTE[size];
-	memset(nopArray, 0x90, size); //0x90 is NOP instruction
-
-	PatchEx(dst, nopArray, size, hProcess);
-	delete[] nopArray;
+	handle = NULL;
 }
 
-uintptr_t mem::FindDMAAddy(HANDLE hProc, uintptr_t ptr, std::vector<unsigned int> offsets)
+mem::~mem()
 {
-	uintptr_t addr = ptr;
-	for (unsigned int i = 0; i < offsets.size(); ++i)
+	CloseHandle(handle);
+}
+
+DWORD mem::getProcess(const wchar_t* procName)
+{
+	HANDLE hProcessId = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+	DWORD process;
+	PROCESSENTRY32 pEntry;
+	pEntry.dwSize = sizeof(pEntry);
+
+	do
 	{
-		ReadProcessMemory(hProc, (BYTE*)addr, &addr, sizeof(addr), NULL);
-		addr += offsets[i];
-	}
-	return addr;
+		if (!_wcsicmp(pEntry.szExeFile, procName))
+		{
+			process = pEntry.th32ProcessID;
+			CloseHandle(hProcessId);
+			handle = OpenProcess(PROCESS_ALL_ACCESS, false, process);
+		}
+
+	} while (Process32Next(hProcessId, &pEntry));
+	return process;
 }
 
-/*
-Internal Versions Do not use Handles
-Internal Does not use RPM or WPM - uses memory directly
-*/
-
-void mem::Patch(BYTE* dst, BYTE* src, unsigned int size)
-//src - new byte instructions to patch, dst - destination address to patch over
-//size is the # of instruction BYTE*s we're using
+uintptr_t mem::getModule(DWORD procId, const wchar_t* modName) //returns module base address
 {
-	DWORD oldprotect; //old permissions we will rewrite later
-	VirtualProtect(dst, size, PAGE_EXECUTE_READWRITE, &oldprotect);
-	memcpy(dst, src, size); //memcpy is used in place of WPM for internal
-	VirtualProtect(dst, size, oldprotect, &oldprotect);
+	HANDLE hModule = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, procId);
+	MODULEENTRY32 mEntry;
+	mEntry.dwSize = sizeof(mEntry);
 
-}
-void mem::Nop(BYTE* dst, unsigned int size)
-{
-	DWORD oldprotect; //old permissions we will rewrite later
-	VirtualProtect(dst, size, PAGE_EXECUTE_READWRITE, &oldprotect);
-	memset(dst, 0x90, size); //0x90 - nop fucntion
-	VirtualProtect(dst, size, oldprotect, &oldprotect);
-}
-
-uintptr_t mem::FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets)
-{
-	uintptr_t addr = ptr;
-	for (unsigned int i = 0; i < offsets.size(); ++i)
+	do
 	{
-		addr = *(uintptr_t*)addr;
-		addr += offsets[i];
+		if (!_wcsicmp(mEntry.szModule, modName))
+		{
+			CloseHandle(hModule);
+			return (DWORD)mEntry.hModule;
+		}
+	} while (Module32Next(hModule, &mEntry));
+	return 0;
+}
+
+uintptr_t mem::getAddress(uintptr_t addr, std::vector<unsigned int> vect)
+{
+	for (unsigned int i = 0; i < vect.size(); i++)
+	{
+		ReadProcessMemory(handle, (BYTE*)addr, &addr, sizeof(addr), 0);
+		addr += vect[i];
 	}
 	return addr;
 }

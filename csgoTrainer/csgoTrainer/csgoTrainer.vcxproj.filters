@@ -18,13 +18,7 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="mem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="proc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,13 +29,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="mem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="proc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

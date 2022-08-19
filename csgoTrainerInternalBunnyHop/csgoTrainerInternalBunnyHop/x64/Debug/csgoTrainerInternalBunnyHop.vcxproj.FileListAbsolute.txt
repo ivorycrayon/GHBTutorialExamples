@@ -1,0 +1,3 @@
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\x64\Debug\csgoTrainerInternalBunnyHop.vcxproj.MdMergeInputs.cache
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\x64\Debug\csgoTrainerInternalBunnyHop.vcxproj.cppwinrt_plat.cache
+C:\Users\Ivory\source\repos\csgoTrainerInternalBunnyHop\csgoTrainerInternalBunnyHop\x64\Debug\csgoTrainerInternalBunnyHop.vcxproj.cppwinrt_comp.cache
