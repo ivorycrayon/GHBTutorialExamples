@@ -16,7 +16,7 @@ public:
 	{
 		//              Type     Name    Offset
 		DEFINE_MEMBER_N(int32_t, health, 0x100);
-		DEFINE_MEMBER_N(BYTE, flags, 0x104);
+		DEFINE_MEMBER_N(uint32_t, flags, 0x104);
 		DEFINE_MEMBER_N(Vector3, viewOffset, 0x108);
 		DEFINE_MEMBER_N(Vector3, velocity, 0x114);		
 		DEFINE_MEMBER_N(bool, bDormant, 0xED);

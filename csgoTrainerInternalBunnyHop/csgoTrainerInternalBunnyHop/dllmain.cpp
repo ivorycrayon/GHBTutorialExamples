@@ -10,10 +10,14 @@
 #include <string>
 
 //sv_cheats 1; sv_lan 1; bot_kick; bot_stop 1; mp_autoteambalance 0; mp_limitteams 5; mp_roundtime_defuse 60; mp_freezetime 0; mp_buytime 99999; ff_damage_reduction_bullets 1; mp_afterroundmoney 16000; endround; bot_add ct; bot_add t; bot_add ct; bot_add t;
+//sv_cheats 1;sv_enablebunnyhopping 1;sv_maxvelocity 7000;sv_staminamax 0;sv_staminalandcost 0;sv_staminajumpcost 0;sv_accelerate_use_weapon_speed 0;sv_staminarecoveryrate 0;sv_autobunnyhopping 0;sv_airaccelerate 2000
 
 //uintptr_t casting is to allow compatibility with x64
 //need to run debuggger -> inject -> step through
 //hit end -> make changes to code -> reinject
+
+#define FL_ONGROUND (1<<0)
+#define FL_IN_JUMP (1<<8)
 
 struct gameOffsets
 {
@@ -70,8 +74,10 @@ DWORD WINAPI HackThread(HMODULE hModule)
 		localPlayer = *(entity**)(moduleBase + offsets.local_player);
 		localEngine = *(engine**)(engineBase + offsets.client_state);
 		float oldViewX = localEngine->viewX;
-
-		std::cout << "view x: " << localEngine->viewX << std::endl;
+		Sleep(5);
+		
+		//std::cout << localEngine->viewX - oldViewX << std::endl;
+		//std::cout << "view x: " << localEngine->viewX << std::endl;
 		// left is positive right is negative
 		// at 180 it switches to -180
 
@@ -84,11 +90,24 @@ DWORD WINAPI HackThread(HMODULE hModule)
 		} 
 		if (isPlayerMoving(localPlayer))
 		{
-			if (GetAsyncKeyState(VK_SPACE) && localPlayer->flags & (1 << 0))
+			if(!(localPlayer->flags & FL_ONGROUND))
+			{
+				std::cout << "in air \n";
+				if (localEngine->viewX > oldViewX)
+				{
+					std::cout << "moving left \n";
+				}
+				else if (localEngine->viewX < oldViewX)
+				{
+					std::cout << "moving right \n";
+				}
+			}
+			
+				
+			if (GetAsyncKeyState(VK_SPACE) && localPlayer->flags & FL_ONGROUND)
 			{
 				*(uintptr_t*)(moduleBase + offsets.fJump) = 6;
 			}
-			//check if in air
 		}
 
 		

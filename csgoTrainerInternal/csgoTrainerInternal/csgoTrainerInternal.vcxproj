@@ -103,6 +103,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="color.hpp" />
+    <ClInclude Include="csgo.hpp" />
     <ClInclude Include="csgo_ent.h" />
     <ClInclude Include="hook.h" />
     <ClInclude Include="mem.h" />
@@ -110,8 +111,8 @@
     <ClInclude Include="proc.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\csgoTrainer\csgoTrainer\hook.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="hook.cpp" />
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

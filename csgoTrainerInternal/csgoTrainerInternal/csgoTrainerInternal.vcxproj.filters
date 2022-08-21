@@ -45,6 +45,9 @@
     <ClInclude Include="csgo_ent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="csgo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -59,7 +62,7 @@
     <ClCompile Include="proc.cpp">
       <Filter>proc</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\csgoTrainer\csgoTrainer\hook.cpp">
+    <ClCompile Include="hook.cpp">
       <Filter>hook</Filter>
     </ClCompile>
   </ItemGroup>
