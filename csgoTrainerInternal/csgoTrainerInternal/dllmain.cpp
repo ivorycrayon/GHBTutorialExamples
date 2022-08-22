@@ -10,27 +10,29 @@
 #include "csgo_ent.h"
 #include <string>
 
-//bots//sv_cheats 1; bot_kick; bot_stop 1; mp_autoteambalance 0; mp_limitteams 5; mp_roundtime_defuse 60; mp_freezetime 0; mp_buytime 99999; ff_damage_reduction_bullets 1; endround; bot_add ct; bot_add t;
+//bots//sv_cheats 1; bot_kick; bot_stop 1; mp_autoteambalance 0; mp_limitteams 10; mp_roundtime_defuse 60; mp_freezetime 0; mp_buytime 99999; ff_damage_reduction_bullets 1; mp_afterroundmoney 10000; endround; bot_add ct; bot_add t;
 //bhop//sv_cheats 1;sv_enablebunnyhopping 1;sv_maxvelocity 7000;sv_staminamax 0;sv_staminalandcost 0;sv_staminajumpcost 0;sv_accelerate_use_weapon_speed 0;sv_staminarecoveryrate 0;sv_autobunnyhopping 0;sv_airaccelerate 2000;
 
 #define FL_ONGROUND (1<<0)
 #define FL_IN_JUMP (1<<8)
 
+using namespace hazedumper;
+
 struct gameOffsets
 {
-	uintptr_t dwLocalPlayer = hazedumper::signatures::dwLocalPlayer;
-	uintptr_t dwForceJump = hazedumper::signatures::dwForceJump;
-	uintptr_t dwForceLeft = hazedumper::signatures::dwForceLeft;
-	uintptr_t dwForceRight = hazedumper::signatures::dwForceRight;
-	uintptr_t dwForceAttack = hazedumper::signatures::dwForceAttack;
-	uintptr_t dwClientState = hazedumper::signatures::dwClientState;
-	uintptr_t viewX = hazedumper::signatures::dwClientState_ViewAngles;
-	uintptr_t base_entity_list = hazedumper::signatures::dwEntityList - 0x10;
-	uintptr_t entity_list = hazedumper::signatures::dwEntityList;
-	uintptr_t m_iItemDefinitionIndex = hazedumper::netvars::m_iItemDefinitionIndex;
-	uintptr_t dwGlowObjectManager = hazedumper::signatures::dwGlowObjectManager;
-	uintptr_t m_clrRender = hazedumper::netvars::m_clrRender;
-	uintptr_t model_ambient_min = hazedumper::signatures::model_ambient_min;
+	uintptr_t dwLocalPlayer = signatures::dwLocalPlayer;
+	uintptr_t dwForceJump = signatures::dwForceJump;
+	uintptr_t dwForceLeft = signatures::dwForceLeft;
+	uintptr_t dwForceRight = signatures::dwForceRight;
+	uintptr_t dwForceAttack = signatures::dwForceAttack;
+	uintptr_t dwClientState = signatures::dwClientState;
+	uintptr_t dwClientState_ViewAngles = signatures::dwClientState_ViewAngles;
+	uintptr_t base_entity_list = signatures::dwEntityList - 0x10;
+	uintptr_t entity_list = signatures::dwEntityList;
+	uintptr_t m_iItemDefinitionIndex = netvars::m_iItemDefinitionIndex;
+	uintptr_t dwGlowObjectManager = signatures::dwGlowObjectManager;
+	uintptr_t m_clrRender = netvars::m_clrRender;
+	uintptr_t model_ambient_min = signatures::model_ambient_min;
 
 }offsets;
 
@@ -53,6 +55,7 @@ struct globalVariables
 	ClrRender clrTeam;
 	ClrRender clrRender;
 	int32_t origBrightness;
+	int32_t timeSinceLastShot;
 	
 }global;
 
@@ -189,13 +192,13 @@ void handleGlow()
 	{
 		if (e.entPtr && i != 0)
 		{
-			int32_t enemyTeam;
+			int32_t enemyTeam = 0;
 			int32_t COUNTER_TERRORIST = 3;
 			int32_t TERRORIST = 2;
 
 			if (global.localPlayer->m_iTeamNum == COUNTER_TERRORIST)
 				enemyTeam = TERRORIST;
-			if (global.localPlayer->m_iTeamNum == TERRORIST)
+			else if (global.localPlayer->m_iTeamNum == TERRORIST)
 				enemyTeam = COUNTER_TERRORIST;
 
 			if (e.entPtr->m_iTeamNum == global.localPlayer->m_iTeamNum)
@@ -291,10 +294,13 @@ float getDistance(entity* target)
 
 void shoot()
 {
-	*global.forceAttack = 5;
-	Sleep(20);
-	*global.forceAttack = 4;
-	Sleep(global.fDelay);
+	if (clock() - global.timeSinceLastShot > global.fDelay)
+	{
+		*global.forceAttack = 5;
+		Sleep(5);
+		*global.forceAttack = 4;
+		global.timeSinceLastShot = clock();
+	}
 }//could add random delay
 
 bool checkTrigBot()
@@ -340,8 +346,8 @@ DWORD WINAPI HackThread(HMODULE hModule)
 	
 	//Setup Console
 	SetConsoleTitle(L"~Swag Central~");
-	system("mode 53, 21");
-	int timeSinceLastUpdate = clock();
+	system("mode 53, 26");
+	int32_t timeSinceLastUpdate = clock();
 
 	//Get addresses
 	global.gameModule = (uintptr_t)GetModuleHandle(L"client.dll");
@@ -351,6 +357,7 @@ DWORD WINAPI HackThread(HMODULE hModule)
 	//set objects
 	global.localPlayer = *(entity**)(global.gameModule + offsets.dwLocalPlayer);
 	global.localEngine = *(engine**)(global.engineModule + offsets.dwClientState);
+	//Vector3* viewAngles = (Vector3*)(*(uintptr_t*)(global.engineModule + offsets.dwClientState) + offsets.dwClientState_ViewAngles);
 
 	//set pointers
 	global.forceJump = (int32_t*)(global.gameModule + offsets.dwForceJump);
@@ -364,16 +371,22 @@ DWORD WINAPI HackThread(HMODULE hModule)
 	bool bBHop = false;
 	bool bRadar = false;
 	bool bGlow = false;
+	bool bFlash = false;
+	bool bRecoil = false;
 
 	//console strings
-	std::string sTrigBot = "OFF", sBHop = "OFF", sRadar = "OFF", sGlow = "OFF";
+	std::string sTrigBot = "OFF", sBHop = "OFF", sRadar = "OFF", sGlow = "OFF", sFlash = "OFF", sRecoil = "OFF";
 
+	//check local player
 	if(global.localPlayer == NULL)
 		while(global.localPlayer == NULL)
 			global.localPlayer = *(entity**)(global.gameModule + offsets.dwLocalPlayer);
 
 	//odds and ends
-	float oldViewX = global.localEngine->viewX;
+	Vector3 oldView = global.localEngine->viewAngle;
+	oldView.Normalize();
+	float oldViewX = oldView.y;
+
 	global.clrEnemy.red = 255;
 	global.clrEnemy.green = 0;
 	global.clrEnemy.blue = 0;
@@ -388,13 +401,25 @@ DWORD WINAPI HackThread(HMODULE hModule)
 
 	global.origBrightness = *(int32_t*)(global.engineModule + offsets.model_ambient_min);
 
+	Vector3 oldPunch = { 0,0,0 };
+
 	//Hack Loop
 	while (true)  
 	{
+		//setup globals
 		global.localPlayer = *(entity**)(global.gameModule + offsets.dwLocalPlayer);
+		if (global.localPlayer == NULL)
+		{
+			system("cls");
+			std::cout << "Waiting to load local player into match" << std::endl;
+			while (global.localPlayer == NULL)
+				global.localPlayer = *(entity**)(global.gameModule + offsets.dwLocalPlayer);
+		}
 		global.localEngine = *(engine**)(global.engineModule + offsets.dwClientState);
+		global.glowObjectAddress = *(uintptr_t*)(global.gameModule + offsets.dwGlowObjectManager);
 		
 
+		//Console
 		if (global.bUpdateDisplay || clock() - timeSinceLastUpdate > 1000) //update every 3000ms or on keypress
 		{
 			system("cls");
@@ -426,6 +451,14 @@ DWORD WINAPI HackThread(HMODULE hModule)
 			if (bGlow) { std::cout << dye::green(sGlow); }
 			else { std::cout << dye::red(sGlow); }
 			std::cout << " <-" << std::endl << std::endl;
+			std::cout << "[NUMPAD5] Anti-Flash                    -> ";
+			if (bFlash) { std::cout << dye::green(sFlash); }
+			else { std::cout << dye::red(sFlash); }
+			std::cout << " <-" << std::endl << std::endl;
+			std::cout << "[NUMPAD6] Recoil Control                -> ";
+			if (bRecoil) { std::cout << dye::green(sRecoil); }
+			else { std::cout << dye::red(sRecoil); }
+			std::cout << " <-" << std::endl << std::endl;
 			std::cout << dye::red("[END] Exit") << std::endl << std::endl;
 			std::cout << "---------------------------------------------------";
 
@@ -438,6 +471,7 @@ DWORD WINAPI HackThread(HMODULE hModule)
 		//Get key input
 		if (GetAsyncKeyState(VK_END) & 1)
 		{
+			handleUnglow();
 			break;
 		}
 		if (GetAsyncKeyState(VK_NUMPAD1) & 1)
@@ -472,7 +506,18 @@ DWORD WINAPI HackThread(HMODULE hModule)
 			if (bRadar)
 				sRadar = "ON ";
 			else
+			{
+				CBaseEntityList* entList = (CBaseEntityList*)(global.gameModule + offsets.entity_list);
+				for (auto e : entList->entList)
+				{
+					if (e.entPtr)
+					{
+						if (e.entPtr->m_bSpotted == true)
+							e.entPtr->m_bSpotted = false;
+					}
+				}
 				sRadar = "OFF";
+			}
 		}
 		if (GetAsyncKeyState(VK_NUMPAD4) & 1)
 		{
@@ -491,6 +536,26 @@ DWORD WINAPI HackThread(HMODULE hModule)
 			}
 				
 		}
+		if (GetAsyncKeyState(VK_NUMPAD5) & 1)
+		{
+			global.bUpdateDisplay = true;
+			bFlash = !bFlash;
+
+			if (bFlash)
+				sFlash = "ON ";
+			else
+				sFlash = "OFF";
+		}
+		if (GetAsyncKeyState(VK_NUMPAD6) & 1)
+		{
+			global.bUpdateDisplay = true;
+			bRecoil = !bRecoil;
+
+			if (bRecoil)
+				sRecoil = "ON ";
+			else
+				sRecoil = "OFF";
+		}
 
 		//Hack Logic
 		if (bTrigBot)
@@ -508,10 +573,12 @@ DWORD WINAPI HackThread(HMODULE hModule)
 
 				if (!(global.localPlayer->m_fFlags & FL_ONGROUND))
 				{
-					//std::cout << "in air \n";
-					if (global.localEngine->viewX > oldViewX)
+					std::cout << "in air \n";
+					if (global.localEngine->viewAngle.y > oldViewX)
 					{
-						oldViewX = global.localEngine->viewX;
+						oldView = global.localEngine->viewAngle;
+						oldView.Normalize();
+						oldViewX = oldView.y;
 
 						if (*global.forceRight == 1)
 							*global.forceRight = 0;
@@ -519,11 +586,13 @@ DWORD WINAPI HackThread(HMODULE hModule)
 						*global.forceLeft = 1;
 						Sleep(5);
 						*global.forceLeft = 0;
-						//std::cout << "moving left \n";
+						std::cout << "moving left \n";
 					}
-					else if (global.localEngine->viewX < oldViewX)
+					else if (global.localEngine->viewAngle.y < oldViewX)
 					{
-						oldViewX = global.localEngine->viewX;
+						oldView = global.localEngine->viewAngle;
+						oldView.Normalize();
+						oldViewX = oldView.y;
 
 						if(*global.forceLeft == 1)
 							*global.forceLeft = 0;
@@ -531,7 +600,7 @@ DWORD WINAPI HackThread(HMODULE hModule)
 						*global.forceRight = 1;
 						Sleep(5);
 						*global.forceRight = 0;						
-						//std::cout << "moving right \n";
+						std::cout << "moving right \n";
 					}
 				}				
 			}
@@ -561,23 +630,29 @@ DWORD WINAPI HackThread(HMODULE hModule)
 				i++;
 			}
 		}
-		else
-		{
-			CBaseEntityList* entList = (CBaseEntityList*)(global.gameModule + offsets.entity_list);
-			for (auto e : entList->entList)
-			{
-				if (e.entPtr)
-				{
-					if(e.entPtr->m_bSpotted == true)
-						e.entPtr->m_bSpotted = false;
-				}
-			}
-		}
 		if (bGlow)
 		{
 			handleGlow();
 		}
-
+		if (bFlash)
+		{
+			if (global.localPlayer->m_fFlashDuration > 0)
+				global.localPlayer->m_fFlashDuration = 0;
+		}
+		if (bRecoil)
+		{
+			Vector3 punchAngle = global.localPlayer->m_aimPunchAngle * 2;
+			if (global.localPlayer->m_iShotsFired > 1)
+			{
+				//calc rcs
+				Vector3 newAngle = global.localEngine->viewAngle + oldPunch - punchAngle;
+				//normalize
+				newAngle.Normalize();
+				//set
+				global.localEngine->viewAngle = newAngle;
+			}
+			oldPunch = punchAngle;
+		}
 
 		Sleep(5);
 
@@ -588,6 +663,7 @@ DWORD WINAPI HackThread(HMODULE hModule)
 	fclose(f);
 	FreeConsole();
 	FreeLibraryAndExitThread(hModule, 0);
+	CloseHandle(hModule);
 	return 0;	
 }
 
