@@ -9,6 +9,8 @@
 #include "hook.h"
 #include "csgo_ent.h"
 #include <string>
+#include <random>
+
 
 //bots//sv_cheats 1; bot_kick; bot_stop 1; mp_autoteambalance 0; mp_limitteams 10; mp_roundtime_defuse 60; mp_freezetime 0; mp_buytime 99999; ff_damage_reduction_bullets 1; mp_afterroundmoney 10000; endround; bot_add ct; bot_add t;
 //bhop//sv_cheats 1;sv_enablebunnyhopping 1;sv_maxvelocity 7000;sv_staminamax 0;sv_staminalandcost 0;sv_staminajumpcost 0;sv_accelerate_use_weapon_speed 0;sv_staminarecoveryrate 0;sv_autobunnyhopping 0;sv_airaccelerate 2000;
@@ -58,6 +60,14 @@ struct globalVariables
 	int32_t timeSinceLastShot;
 	
 }global;
+
+int randomDelay(int minMilliseconds, int maxMilliseconds)
+{
+	std::random_device rd; 
+	std::mt19937 gen(rd()); 
+	std::uniform_int_distribution<> distr(minMilliseconds, maxMilliseconds);
+	return distr(gen);
+}
 
 struct GlowStruct
 {
@@ -232,30 +242,6 @@ void handleUnglow()
 	setBrightness(0.0f);
 }
 
-void setTrigBotDelay(float distance)
-{
-	float delay;
-	switch (global.iWeaponID)
-	{
-	case WEAPON_M4A1_SILENCER: delay = 8; break;
-	case WEAPON_M4A1: delay = 10; break;
-	case WEAPON_USP_SILENCER: delay = 15; break;
-	case WEAPON_GLOCK: delay = 6.5; break;
-	case WEAPON_DEAGLE: delay = 33; break;
-	case WEAPON_AK47: delay = 15; break;
-	case WEAPON_AUG: delay = 2.0; break;
-	case WEAPON_AWP: delay = .3; break;
-	case WEAPON_SSG08: delay = .3; break;
-	case WEAPON_UMP45: delay = 3.3; break;
-	case WEAPON_P90: delay = 3.3; break;
-
-	default: delay = 0;
-	}
-	global.fDelay = distance * delay;
-	//std::cout << "weapon delay is " << global.fDelay << " ms" << std::endl;
-	
-}
-
 void getWeaponID()
 {
 	uint32_t currentWeapon = global.localPlayer->m_hActiveWeapon;
@@ -294,14 +280,51 @@ float getDistance(entity* target)
 
 void shoot()
 {
-	if (clock() - global.timeSinceLastShot > global.fDelay)
+	if (global.fDelay == 0)
 	{
+		//std::cout << "shooting with delay = " << global.fDelay << std::endl;
 		*global.forceAttack = 5;
-		Sleep(5);
+		Sleep(20 + randomDelay(1,5));
 		*global.forceAttack = 4;
 		global.timeSinceLastShot = clock();
 	}
-}//could add random delay
+	else
+	{
+		float newDelay = global.fDelay + randomDelay(0, 99);
+		
+		if (clock() - global.timeSinceLastShot > newDelay)
+		{
+			//std::cout << "shooting with delay = " << newDelay << std::endl;
+			*global.forceAttack = 5;
+			Sleep(20 + randomDelay(1, 5));
+			*global.forceAttack = 4;
+			global.timeSinceLastShot = clock();
+		}
+	}
+
+}
+
+void setTrigBotDelay(float distance) // add config file
+{
+	float delay;
+	switch (global.iWeaponID)
+	{
+	case WEAPON_M4A1_SILENCER: delay = 5; break;
+	case WEAPON_M4A1: delay = 7; break;
+	case WEAPON_USP_SILENCER: delay = 9; break;
+	case WEAPON_GLOCK: delay = 10; break;
+	case WEAPON_DEAGLE: delay = 33; break;
+	case WEAPON_AK47: delay = 15; break;
+	case WEAPON_AUG: delay = 2.0; break;
+	case WEAPON_AWP: delay = .3; break;
+	case WEAPON_SSG08: delay = .3; break;
+	case WEAPON_UMP45: delay = 3.3; break;
+	case WEAPON_P90: delay = 3.3; break;
+
+	default: delay = 0;
+	}
+	global.fDelay = distance * delay;
+}
 
 bool checkTrigBot()
 {
@@ -312,8 +335,12 @@ bool checkTrigBot()
 		if (target->m_iTeamNum != global.localPlayer->m_iTeamNum && target->m_iHealth > 0)
 		{
 			float distance = getDistance(target);
+			//std::cout << "dist: " << getDistance(target) << std::endl;
 			getWeaponID();
-			setTrigBotDelay(distance);
+			if (distance < 7)
+				setTrigBotDelay(0);
+			else
+				setTrigBotDelay(distance);
 
 			if (global.iWeaponID == WEAPON_AWP | global.iWeaponID == WEAPON_SSG08)
 			{
@@ -420,7 +447,7 @@ DWORD WINAPI HackThread(HMODULE hModule)
 		
 
 		//Console
-		if (global.bUpdateDisplay || clock() - timeSinceLastUpdate > 1000) //update every 3000ms or on keypress
+		if (global.bUpdateDisplay || clock() - timeSinceLastUpdate > 3000) //update every 3000ms or on keypress
 		{
 			system("cls");
 			std::cout << "----------------------------------------------------" << std::endl;
@@ -570,10 +597,9 @@ DWORD WINAPI HackThread(HMODULE hModule)
 				{
 					*global.forceJump = 6;
 				}
-
 				if (!(global.localPlayer->m_fFlags & FL_ONGROUND))
 				{
-					std::cout << "in air \n";
+					//std::cout << "in air \n";
 					if (global.localEngine->viewAngle.y > oldViewX)
 					{
 						oldView = global.localEngine->viewAngle;
@@ -584,9 +610,9 @@ DWORD WINAPI HackThread(HMODULE hModule)
 							*global.forceRight = 0;
 
 						*global.forceLeft = 1;
-						Sleep(5);
+						Sleep(5 + randomDelay(0, 5));
 						*global.forceLeft = 0;
-						std::cout << "moving left \n";
+						//std::cout << "moving left \n";
 					}
 					else if (global.localEngine->viewAngle.y < oldViewX)
 					{
@@ -598,9 +624,9 @@ DWORD WINAPI HackThread(HMODULE hModule)
 							*global.forceLeft = 0;
 
 						*global.forceRight = 1;
-						Sleep(5);
+						Sleep(5 + randomDelay(0, 5));
 						*global.forceRight = 0;						
-						std::cout << "moving right \n";
+						//std::cout << "moving right \n";
 					}
 				}				
 			}
