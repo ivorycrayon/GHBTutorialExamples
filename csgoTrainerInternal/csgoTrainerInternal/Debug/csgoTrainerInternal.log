@@ -1,42 +1,8 @@
-﻿  dllmain.cpp
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\color.hpp(121,70): warning C4244: 'argument': conversion from 'int' to 'WORD', possible loss of data
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(61,64): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(62,60): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(63,57): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(64,58): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(65,57): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(66,66): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(67,62): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(68,57): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(69,70): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(70,59): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(71,63): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(72,64): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(73,68): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(74,73): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(75,66): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(76,70): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(88,46): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(89,49): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(99,49): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\csgo_ent.h(109,76): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(167,45): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(168,39): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(209,42): warning C4805: '==': unsafe mix of type 'bool' and type 'int32_t' in operation
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(211,47): warning C4805: '==': unsafe mix of type 'bool' and type 'int32_t' in operation
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(219,37): warning C4805: '==': unsafe mix of type 'bool' and type 'int32_t' in operation
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(261,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(271,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(319,29): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(320,31): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(321,32): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(322,30): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(345,73): warning C4554: '|': check operator precedence for possible error; use parentheses to clarify precedence
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(425,27): warning C4245: '=': conversion from 'int' to 'BYTE', signed/unsigned mismatch
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(426,29): warning C4245: '=': conversion from 'int' to 'BYTE', signed/unsigned mismatch
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(427,28): warning C4245: '=': conversion from 'int' to 'BYTE', signed/unsigned mismatch
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(458,41): warning C4806: '==': unsafe operation: no value of type 'bool' promoted to type 'int' can equal the given constant
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(460,46): warning C4806: '==': unsafe operation: no value of type 'bool' promoted to type 'int' can equal the given constant
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(699,15): warning C4100: 'lpReserved': unreferenced formal parameter
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(693): warning C4702: unreachable code
+﻿  LocalPlayer.cpp
+  Player.cpp
+  dllmain.cpp
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(750,74): warning C4100: 'lpReserved': unreferenced formal parameter
+  Generating Code...
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(169): warning C4706: assignment within conditional expression
+C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(746): warning C4702: unreachable code
   csgoTrainerInternal.vcxproj -> C:\Users\Ivory\source\repos\csgoTrainerInternal\Debug\csgoTrainerInternal.dll

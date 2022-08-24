@@ -19,11 +19,14 @@
     <Filter Include="proc">
       <UniqueIdentifier>{a35a83ec-d738-4793-bc20-340cbe40b1a4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="pch">
-      <UniqueIdentifier>{13e8f51f-7398-4bc6-8163-59a8aaf726a8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="hook">
       <UniqueIdentifier>{7e278223-e180-4756-b386-cc05425a0890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{3c4e475a-837d-4ded-a86b-ad6931622967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LocalPlayer">
+      <UniqueIdentifier>{fd26ec48-fb88-4f4a-9e15-dfd7eb5b6ea6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,28 +36,31 @@
     <ClInclude Include="proc.h">
       <Filter>proc</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>pch</Filter>
-    </ClInclude>
     <ClInclude Include="color.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hook.h">
       <Filter>hook</Filter>
     </ClInclude>
-    <ClInclude Include="csgo_ent.h">
+    <ClInclude Include="csgo_ent.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="csgo.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Vector3.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="LocalPlayer.hpp">
+      <Filter>LocalPlayer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>pch</Filter>
     </ClCompile>
     <ClCompile Include="mem.cpp">
       <Filter>mem</Filter>
@@ -64,6 +70,12 @@
     </ClCompile>
     <ClCompile Include="hook.cpp">
       <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="LocalPlayer.cpp">
+      <Filter>LocalPlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

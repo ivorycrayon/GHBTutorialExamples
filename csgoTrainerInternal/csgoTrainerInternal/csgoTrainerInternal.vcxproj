@@ -63,7 +63,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup>
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <PreprocessorDefinitions>_CONSOLE;WIN32_LEAN_AND_MEAN;WINRT_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -85,6 +85,7 @@
     <ClCompile>
       <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4244;4201;4805;4305;4245;4806;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
@@ -104,20 +105,21 @@
   <ItemGroup>
     <ClInclude Include="color.hpp" />
     <ClInclude Include="csgo.hpp" />
-    <ClInclude Include="csgo_ent.h" />
+    <ClInclude Include="csgo_ent.hpp" />
+    <ClInclude Include="LocalPlayer.hpp" />
+    <ClInclude Include="Vector3.hpp" />
+    <ClInclude Include="Player.hpp" />
     <ClInclude Include="hook.h" />
     <ClInclude Include="mem.h" />
-    <ClInclude Include="pch.h" />
     <ClInclude Include="proc.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="hook.cpp" />
     <ClCompile Include="mem.cpp" />
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader>Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="proc.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="LocalPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

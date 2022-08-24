@@ -1,16 +1,17 @@
-﻿#include "pch.h"
-#include <windows.h>
+﻿#include <windows.h>
 #include <iostream>
 #include <TlHelp32.h>
-#include "mem.h"
-#include "proc.h"
-#include "color.hpp"
-#include "csgo.hpp"
-#include "hook.h"
-#include "csgo_ent.h"
 #include <string>
 #include <random>
-
+#include <math.h>
+#include "mem.h"
+#include "proc.h"
+#include "hook.h"
+#include "color.hpp"
+#include "csgo.hpp"
+#include "csgo_ent.hpp"
+#include "Player.hpp"
+#include "LocalPlayer.hpp"
 
 //bots//sv_cheats 1; bot_kick; bot_stop 1; mp_autoteambalance 0; mp_limitteams 10; mp_roundtime_defuse 60; mp_freezetime 0; mp_buytime 99999; ff_damage_reduction_bullets 1; mp_afterroundmoney 10000; endround; bot_add ct; bot_add t;
 //bhop//sv_cheats 1;sv_enablebunnyhopping 1;sv_maxvelocity 7000;sv_staminamax 0;sv_staminalandcost 0;sv_staminajumpcost 0;sv_accelerate_use_weapon_speed 0;sv_staminarecoveryrate 0;sv_autobunnyhopping 0;sv_airaccelerate 2000;
@@ -60,14 +61,6 @@ struct globalVariables
 	int32_t timeSinceLastShot;
 	
 }global;
-
-int randomDelay(int minMilliseconds, int maxMilliseconds)
-{
-	std::random_device rd; 
-	std::mt19937 gen(rd()); 
-	std::uniform_int_distribution<> distr(minMilliseconds, maxMilliseconds);
-	return distr(gen);
-}
 
 struct GlowStruct
 {
@@ -140,6 +133,63 @@ enum weaponID : int16_t
 	WEAPON_KNIFE_BUTTERFLY = 515,
 	WEAPON_KNIFE_PUSH = 516
 };
+
+Player* getClosestEnemy()
+{
+	LocalPlayer* localPlayer = LocalPlayer::Get();
+
+	float closestDistance = 1000000;
+	int closestDistanceIndex = -1;
+
+	for (int i = 1; i < *Player::GetMaxPlayers(); i++)
+	{
+		Player* currentPlayer = Player::GetPlayer(i);
+
+		if (!currentPlayer || !(*(uintptr_t*)currentPlayer) || (uintptr_t)currentPlayer == (uintptr_t)global.localPlayer)
+		{
+			continue; // skips if null, skips if it's you
+		}
+		if (*currentPlayer->GetTeam() == global.localPlayer->m_iTeamNum)
+		{
+			continue; 
+		}
+		if (*currentPlayer->GetHealth() < 1 || global.localPlayer->m_iHealth < 1)
+		{
+			continue;
+		}
+
+		float currentDistance = localPlayer->GetDistance(currentPlayer->GetOrigin());
+		if (currentDistance < closestDistance)
+		{
+			closestDistance = currentDistance;
+			closestDistanceIndex = i;
+		}
+	}
+
+	if (closestDistanceIndex = -1)
+	{
+		return NULL;
+	}
+	return Player::GetPlayer(closestDistanceIndex);
+}
+
+void aimAtClosestEnemy()
+{
+	Player* closestEnemy = getClosestEnemy();
+
+	if (closestEnemy)
+	{
+		LocalPlayer::Get()->AimAt(closestEnemy->GetBonePos(8)); // 0 is head bone
+	}
+}
+
+int randomDelay(int minMilliseconds, int maxMilliseconds)
+{
+	std::random_device rd; 
+	std::mt19937 gen(rd()); 
+	std::uniform_int_distribution<> distr(minMilliseconds, maxMilliseconds);
+	return distr(gen);
+}
 
 void setBrightness(float brightness)
 {
@@ -342,7 +392,7 @@ bool checkTrigBot()
 			else
 				setTrigBotDelay(distance);
 
-			if (global.iWeaponID == WEAPON_AWP | global.iWeaponID == WEAPON_SSG08)
+			if (global.iWeaponID == WEAPON_AWP || global.iWeaponID == WEAPON_SSG08)
 			{
 				if (!global.localPlayer->m_bIsScoped)
 					return false;
@@ -514,6 +564,10 @@ DWORD WINAPI HackThread(HMODULE hModule)
 		if (GetAsyncKeyState(VK_XBUTTON1) & 0x8000) // 0x8000 indicates the button is currently down, only triggers while held
 		{
 			handleTrigBot();
+		}
+		if (GetAsyncKeyState(VK_XBUTTON2) & 1)
+		{
+			aimAtClosestEnemy();
 		}
 		if (GetAsyncKeyState(VK_NUMPAD2) & 1)
 		{
@@ -693,10 +747,7 @@ DWORD WINAPI HackThread(HMODULE hModule)
 	return 0;	
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule,
-					  DWORD  ul_reason_for_call,
-					  LPVOID lpReserved
-)
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
 {
 	switch (ul_reason_for_call)
 	{
