@@ -145,15 +145,15 @@ Player* getClosestEnemy()
 	{
 		Player* currentPlayer = Player::GetPlayer(i);
 
-		if (!currentPlayer || !(*(uintptr_t*)currentPlayer) || (uintptr_t)currentPlayer == (uintptr_t)global.localPlayer)
+		if (!currentPlayer || !(*(uint32_t*)currentPlayer) || (uint32_t)currentPlayer == (uint32_t)localPlayer)
 		{
 			continue; // skips if null, skips if it's you
 		}
-		if (*currentPlayer->GetTeam() == global.localPlayer->m_iTeamNum)
+		if (*currentPlayer->GetTeam() == *localPlayer->GetTeam())
 		{
 			continue; 
 		}
-		if (*currentPlayer->GetHealth() < 1 || global.localPlayer->m_iHealth < 1)
+		if (*currentPlayer->GetHealth() < 1 || *localPlayer->GetHealth() < 1)
 		{
 			continue;
 		}
@@ -166,7 +166,7 @@ Player* getClosestEnemy()
 		}
 	}
 
-	if (closestDistanceIndex = -1)
+	if (closestDistanceIndex == -1)
 	{
 		return NULL;
 	}
@@ -565,7 +565,7 @@ DWORD WINAPI HackThread(HMODULE hModule)
 		{
 			handleTrigBot();
 		}
-		if (GetAsyncKeyState(VK_XBUTTON2) & 1)
+		if (GetAsyncKeyState(VK_XBUTTON2) & 0x8000)
 		{
 			aimAtClosestEnemy();
 		}

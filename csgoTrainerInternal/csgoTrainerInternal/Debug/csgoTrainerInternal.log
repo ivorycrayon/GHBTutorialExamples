@@ -1,8 +1,4 @@
-﻿  LocalPlayer.cpp
-  Player.cpp
-  dllmain.cpp
+﻿  dllmain.cpp
 C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(750,74): warning C4100: 'lpReserved': unreferenced formal parameter
-  Generating Code...
-C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(169): warning C4706: assignment within conditional expression
 C:\Users\Ivory\source\repos\csgoTrainerInternal\csgoTrainerInternal\dllmain.cpp(746): warning C4702: unreachable code
   csgoTrainerInternal.vcxproj -> C:\Users\Ivory\source\repos\csgoTrainerInternal\Debug\csgoTrainerInternal.dll
