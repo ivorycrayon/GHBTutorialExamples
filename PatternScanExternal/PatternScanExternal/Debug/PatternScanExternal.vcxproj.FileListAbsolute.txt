@@ -1,0 +1,3 @@
+C:\Users\Ivory\source\repos\PatternScanExternal\PatternScanExternal\Debug\PatternScanExternal.vcxproj.MdMergeInputs.cache
+C:\Users\Ivory\source\repos\PatternScanExternal\PatternScanExternal\Debug\PatternScanExternal.vcxproj.cppwinrt_plat.cache
+C:\Users\Ivory\source\repos\PatternScanExternal\PatternScanExternal\Debug\PatternScanExternal.vcxproj.cppwinrt_comp.cache

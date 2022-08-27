@@ -63,7 +63,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup>
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <PreprocessorDefinitions>_CONSOLE;WIN32_LEAN_AND_MEAN;WINRT_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -86,6 +86,9 @@
       <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">OpenGL32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
     <ClCompile>
@@ -102,19 +105,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="assaultcube.h" />
     <ClInclude Include="color.hpp" />
+    <ClInclude Include="geom.h" />
+    <ClInclude Include="glDraw.h" />
+    <ClInclude Include="glText.h" />
     <ClInclude Include="hook.h" />
     <ClInclude Include="mem.h" />
-    <ClInclude Include="pch.h" />
     <ClInclude Include="proc.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AssaultCubeTrainer\AssaultCubeTrainer\hook.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="glDraw.cpp" />
+    <ClCompile Include="glText.cpp" />
     <ClCompile Include="mem.cpp" />
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader>Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="proc.cpp" />
   </ItemGroup>
   <ItemGroup>

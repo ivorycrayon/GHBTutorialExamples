@@ -1,17 +1,19 @@
 ﻿  dllmain.cpp
 C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\color.hpp(121,70): warning C4244: 'argument': conversion from 'int' to 'WORD', possible loss of data
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(31,43): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(32,45): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(43,41): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(44,43): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(45,42): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(46,40): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(47,41): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(48,44): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(49,42): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(50,41): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(51,47): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(52,49): warning C4201: nonstandard extension used: nameless struct/union
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(332,15): warning C4100: 'lpReserved': unreferenced formal parameter
-C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(327): warning C4702: unreachable code
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(39,43): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(40,45): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(51,41): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(52,43): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(53,42): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(54,40): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(55,41): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(56,44): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(57,42): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(58,41): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(59,47): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(60,49): warning C4201: nonstandard extension used: nameless struct/union
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(119,65): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(123,86): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(361,33): warning C4100: 'hModule': unreferenced formal parameter
+C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\AssaultCubeTrainerInternal\dllmain.cpp(397,15): warning C4100: 'lpReserved': unreferenced formal parameter
   AssaultCubeTrainerInternal.vcxproj -> C:\Users\Ivory\source\repos\AssaultCubeTrainerInternal\Debug\AssaultCubeTrainerInternal.dll

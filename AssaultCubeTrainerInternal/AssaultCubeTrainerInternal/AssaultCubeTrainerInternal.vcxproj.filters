@@ -19,11 +19,14 @@
     <Filter Include="proc">
       <UniqueIdentifier>{a35a83ec-d738-4793-bc20-340cbe40b1a4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="pch">
-      <UniqueIdentifier>{13e8f51f-7398-4bc6-8163-59a8aaf726a8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="hook">
       <UniqueIdentifier>{7e278223-e180-4756-b386-cc05425a0890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGL Text">
+      <UniqueIdentifier>{013f3806-5dbe-4bc7-9acf-d036a8afacd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGL Draw">
+      <UniqueIdentifier>{47c13cf3-d514-4d07-bd6e-100eb87421bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,22 +36,28 @@
     <ClInclude Include="proc.h">
       <Filter>proc</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>pch</Filter>
-    </ClInclude>
     <ClInclude Include="color.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hook.h">
       <Filter>hook</Filter>
     </ClInclude>
+    <ClInclude Include="glDraw.h">
+      <Filter>OpenGL Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="glText.h">
+      <Filter>OpenGL Text</Filter>
+    </ClInclude>
+    <ClInclude Include="assaultcube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="geom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>pch</Filter>
     </ClCompile>
     <ClCompile Include="mem.cpp">
       <Filter>mem</Filter>
@@ -58,6 +67,12 @@
     </ClCompile>
     <ClCompile Include="..\..\AssaultCubeTrainer\AssaultCubeTrainer\hook.cpp">
       <Filter>hook</Filter>
+    </ClCompile>
+    <ClCompile Include="glText.cpp">
+      <Filter>OpenGL Text</Filter>
+    </ClCompile>
+    <ClCompile Include="glDraw.cpp">
+      <Filter>OpenGL Draw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "mem.h"
 
 void mem::PatchEx(BYTE* dst, BYTE* src, unsigned int size, HANDLE hProcess) 
@@ -42,6 +41,7 @@ void mem::Patch(BYTE* dst, BYTE* src, unsigned int size)
 {
 	DWORD oldprotect; //old permissions we will rewrite later
 	VirtualProtect(dst, size, PAGE_EXECUTE_READWRITE, &oldprotect);
+
 	memcpy(dst, src, size); //memcpy is used in place of WPM for internal
 	VirtualProtect(dst, size, oldprotect, &oldprotect);
 
@@ -50,6 +50,7 @@ void mem::Nop(BYTE* dst, unsigned int size)
 {
 	DWORD oldprotect; //old permissions we will rewrite later
 	VirtualProtect(dst, size, PAGE_EXECUTE_READWRITE, &oldprotect);
+
 	memset(dst, 0x90, size); //0x90 - nop fucntion
 	VirtualProtect(dst, size, oldprotect, &oldprotect);
 }
