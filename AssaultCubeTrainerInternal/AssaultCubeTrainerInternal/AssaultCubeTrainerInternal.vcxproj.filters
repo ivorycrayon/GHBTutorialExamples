@@ -54,6 +54,9 @@
     <ClInclude Include="geom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ESP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -73,6 +76,12 @@
     </ClCompile>
     <ClCompile Include="glDraw.cpp">
       <Filter>OpenGL Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="geom.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ESP.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

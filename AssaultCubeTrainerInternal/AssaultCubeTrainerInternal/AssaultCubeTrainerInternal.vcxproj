@@ -107,6 +107,7 @@
   <ItemGroup>
     <ClInclude Include="assaultcube.h" />
     <ClInclude Include="color.hpp" />
+    <ClInclude Include="ESP.h" />
     <ClInclude Include="geom.h" />
     <ClInclude Include="glDraw.h" />
     <ClInclude Include="glText.h" />
@@ -117,6 +118,8 @@
   <ItemGroup>
     <ClCompile Include="..\..\AssaultCubeTrainer\AssaultCubeTrainer\hook.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="ESP.cpp" />
+    <ClCompile Include="geom.cpp" />
     <ClCompile Include="glDraw.cpp" />
     <ClCompile Include="glText.cpp" />
     <ClCompile Include="mem.cpp" />

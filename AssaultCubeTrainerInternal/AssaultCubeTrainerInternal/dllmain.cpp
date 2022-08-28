@@ -10,6 +10,7 @@
 #include "glText.h"
 #include "geom.h"
 #include "assaultcube.h"
+#include "ESP.h"
 
 
 //uintptr_t casting is to allow compatibility with x64
@@ -47,8 +48,10 @@ GL::Font glFont;
 const int FONT_HEIGHT = 15;
 const int FONT_WIDTH = 9;
 
-const char* example = "ESP Box";
-const char* example2 = "yo wuttup";
+//const char* example = "ESP Box";
+//const char* example2 = "yo wuttup";
+
+ESP esp;
 
 void Draw()
 {
@@ -61,14 +64,18 @@ void Draw()
 
 	GL::SetupOrtho();
 
+	/*
 	GL::DrawOutline(300, 300, 200, 200, 2.0f, rgb::red);
-
+		
 	float textPointX = glFont.centerText(300, 200, strlen(example) * FONT_WIDTH);
 	float textPointY = 300 - FONT_HEIGHT / 2;
 	glFont.Print(textPointX, textPointY, rgb::green, "%s", example);
 
 	vec3 insideTextPoint = glFont.centerText(300, 300 + 100, 200, 200, strlen(example2) * FONT_WIDTH, FONT_HEIGHT);
 	glFont.Print(insideTextPoint.x, insideTextPoint.y, rgb::green, "%s", example2);
+	*/
+
+	esp.Draw(glFont);
 
 	GL::RestoreGL();
 }
@@ -76,9 +83,6 @@ void Draw()
 //our funtion
 BOOL __stdcall hkwglSwapBuffers(HDC hDc) //hk denotes our hook function
 {
-	//std::cout << "Hooked!" << std::endl;
-
-	//
 	//PlayerEntity* localPlayer = (PlayerEntity*)*(uintptr_t*)(moduleBase + 0x10F4F4); //these lines are the same thing
 	PlayerEntity* localPlayer = *(PlayerEntity**)(moduleBase + 0x10F4F4); //these lines are the same thing
 
@@ -88,12 +92,12 @@ BOOL __stdcall hkwglSwapBuffers(HDC hDc) //hk denotes our hook function
 
 	for (int i = 0; i < *numOfPlayers; i++)
 	{
-		if (entList && isValidEnt(entList->ents[i]))
+		if (entList && esp.isValidEnt(entList->ents[i]))
 		{
 			entList->ents[i]->health = 1;
 			for (int j = 0; j < sizeof(newName); j++)
 			{
-				entList->ents[i]->name[j] = newName[j];
+				//entList->ents[i]->name[j] = newName[j];
 			}
 		}
 	}
@@ -285,12 +289,14 @@ BOOL __stdcall hkwglSwapBuffers(HDC hDc) //hk denotes our hook function
 
 		if (bAmmo)
 		{
-			//uintptr_t ammoAddr = mem::FindDMAAddy(moduleBase + 0x10F4F4, { 0x374, 0x14, 0x0 });
-			//int* ammo = (int*)ammoAddr;
-			//*ammo = 1337;
+			/*
+			uintptr_t ammoAddr = mem::FindDMAAddy(moduleBase + 0x10F4F4, {0x374, 0x14, 0x0});
+			int* ammo = (int*)ammoAddr;
+			*ammo = 1337;
 
-			//or just
-			//*(int*)mem::FindDMAAddy(moduleBase + 0x10F4F4, { 0x374, 0x14, 0x0 }) = 1337;
+			or just
+			*(int*)mem::FindDMAAddy(moduleBase + 0x10F4F4, { 0x374, 0x14, 0x0 }) = 1337;
+			*/
 
 			*localPlayer->currentWeapon->ammoPtr = 69;
 			localPlayer->arAmmo = 420;
@@ -314,13 +320,16 @@ DWORD WINAPI HackThread(HMODULE hModule)
 	SetConsoleTitle(L"~Swag Central~");
 	system("mode 53, 20");
 
-	//get address of original funtion -- if you're trying to find a random function you would have to calculate the address dynamically, after you've reversed it and found it
-	//owglSwapBuffers = (twglSwapBuffers)GetProcAddress(GetModuleHandle(L"opengl32.dll"), "wglSwapBuffers");
+	/*
+	//get address of original funtion-- if you're trying to find a random function you would have to calculate the address dynamically, after you've reversed it and found it
+	owglSwapBuffers = (twglSwapBuffers)GetProcAddress(GetModuleHandle(L"opengl32.dll"), "wglSwapBuffers");
+
 	//execute trampoline hook
-	//owglSwapBuffers = (twglSwapBuffers)TrampHook32((BYTE*)wglSwapBuffersGateway, (BYTE*)hkwglSwapBuffers, 5); //address returned by the tramp hook is the gateway
+	owglSwapBuffers = (twglSwapBuffers)TrampHook32((BYTE*)wglSwapBuffersGateway, (BYTE*)hkwglSwapBuffers, 5); //address returned by the tramp hook is the gateway
 	//this is made redundant with the constructor
 
-	//Hook SwapBuffersHook((BYTE*)GetProcAddress(GetModuleHandle(L"opengl32.dll"), "wglSwapBuffers"), (BYTE*)hkwglSwapBuffers, (BYTE*)&wglSwapBuffersGateway); //this is unwieldy, use the other constructor
+	Hook SwapBuffersHook((BYTE*)GetProcAddress(GetModuleHandle(L"opengl32.dll"), "wglSwapBuffers"), (BYTE*)hkwglSwapBuffers, (BYTE*)&wglSwapBuffersGateway); //this is unwieldy, use the other constructor
+	*/	
 
 	SwapBuffersHook.Enable();
 

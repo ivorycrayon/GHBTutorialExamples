@@ -7,6 +7,7 @@ void GL::SetupOrtho()
 	GLint viewport[4];
 	glGetIntegerv(GL_VIEWPORT, viewport);
 	glViewport(0, 0, viewport[2], viewport[3]);
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0, viewport[2], viewport[3], 0 , -1, 1); //some games have different near and far value - use an api hooking program to get these values
 	glMatrixMode(GL_MODELVIEW);

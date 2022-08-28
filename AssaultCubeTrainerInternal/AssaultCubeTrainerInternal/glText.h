@@ -4,8 +4,7 @@
 #include <stdio.h>
 #include <gl\GL.h>
 #include "mem.h"
-
-struct vec3 { float x, y, z; };
+#include "geom.h"
 
 namespace GL
 {
